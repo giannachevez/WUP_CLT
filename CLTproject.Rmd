@@ -42,11 +42,11 @@ p+ geom_vline(aes(xintercept=mean(kkardashtemp)),
 print(paste('mean = ', mean(my1000$kkardashtemp),' sd = ',sd(my1000$kkardashtemp)))
 ```
 
-In our original dataset with a set standard deviation, when analyzing kKardashtemp and the differences between males and females, it appears that when we input the number 9, there is a significantly higher uptake in males compared to females, with female ratings being very close to zero and male ratings nearing 100. Then, with the number 16, I believe our standard deviation will be approximately 10.5
+In our original dataset with a set standard deviation, when analyzing kKardashtemp and the differences between males and females, it appears that when we input the number 9, there is a significantly higher uptake in males compared to females, with female ratings being very close to zero and male ratings nearing 100. Next, with the number 16, the standard deviation is approximately 10.5, indicating a shift towards a more blended distribution. Finally, with the number 25, the standard deviation decreases to around 8 to 8.5, suggesting that the data is becoming increasingly consolidated, with responses trending towards a consensus and reflecting a clearer preference in the kKardashtemp ratings.
 
 
 ```{r}
-numb=16
+numb=25
 Hdata = Homers_data[sample(1:1000, size=numb*1000, replace=T),"kkardashtemp"]
 mdata  <-matrix(Hdata,nrow=1000,ncol=numb)
 x.avg <- apply(mdata,1,mean)
@@ -59,24 +59,24 @@ p
 # Add mean line
   geom_vline(aes(xintercept=mean(k2)),
             color="blue", linetype="dashed", size=1)
-print(paste('mean = ', mean(my1000$k2),' sd = ',sd(my1000$k2)))
+print(paste('mean = ', mean(my1000$k25),' sd = ',sd(my1000$k25)))
 
 ```
-With the number 9, we can observe a peak where males and females influence each other, leaning more towards the left side of the kKardashtemp scale. When using the number 16, the standard deviation is approximately 10.5, and the voting curve is becoming less varied and more rounded, indicating a decrease in variability.
+With the number 9, we can observe a peak where males and females influence each other, leaning more towards the left side of the kKardashtemp scale. When analyzing the number 16, the standard deviation is approximately 10.1, and the voting curve becomes less varied and more rounded, with a slight lean to the right, indicating a preference for kKardashtemp. The standard deviation for the number 25 is around 8 to 8.5, which reflects the ongoing progression of the graph.
 
 ## We expect the sample mean to be close to population and the standev to get smaller by the ratio of one to the sample size. In this case 1/sqrt(2)
 
 ### There are 3 peaks in the density plot. You pick two people you can get MM,MF.FM,or FF. these are all equally likey so the little peak on left is all the FF's while the little peak on the right is all the MM's so the big one in the middle is both the MF and FM in the same bag so-to-speak.  
 
 ```{r}
-numb = 16
+numb = 25
 Hdata = Homers_data[sample(1:1000,size=numb*1000, replace=T),"kkardashtemp"]
 mdata  <-matrix(Hdata,nrow=1000,ncol=numb)
 x.avg <- apply(mdata,1,mean)
-my1000$k16 = x.avg
+my1000$k25 = x.avg
 
 
-p <- ggplot(my1000, aes(x=k4),col=sex) + 
+p <- ggplot(my1000, aes(x=k25),col=sex) + 
   geom_density() +
 
 # Add mean line
@@ -85,11 +85,11 @@ p <- ggplot(my1000, aes(x=k4),col=sex) +
 p + ggtitle("n = 4") +
   xlab("temperature") + ylab(" density")
 
-print(paste('mean = ', mean(my1000$k4),' sd = ',sd(my1000$k4)))
+print(paste('mean = ', mean(my1000$k25),' sd = ',sd(my1000$k25)))
 
 ```
 
-Unlike the previous graph, which showed greater variability, this new graph with a standard deviation of approximately 14 and the number 9 appears more blended, featuring smaller loops compared to the pronounced dips observed with the previous number 5. With the number 16, the graph shows less inclination towards any side, indicating a consensus in the middle and a peak, although it still trends more towards the right.
+Unlike the previous graph, which exhibited greater variability, this new graph with a standard deviation of approximately 14 and the number 9 appears more blended, featuring smaller loops compared to the pronounced dips observed with the previous number 5. With the number 16, the graph shows less inclination towards any side, indicating a consensus in the middle and a peak, although it still trends more towards the right. When we analyze the number 25, the standard deviation decreases further to around 8 to 8.5, suggesting that the data is becoming increasingly consolidated. This trend indicates a stronger agreement among responses, with kKardashtemp ratings reflecting a more definitive preference as the sample size increases.
 
 ### In this case the stdev was cut in half because the sample size was four. This is what the central limit theorem says. There are also 5 peaks. They go from FFFF,to FFFM, to FFMM to FMMM and finally MMMM.
 
